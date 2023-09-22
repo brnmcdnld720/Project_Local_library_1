@@ -25,14 +25,18 @@ function getMostCommonGenres(books) {
 }
 
 function getMostPopularBooks(books) {
-  const popBooksArray = [];
-
+  const bookNumberCheckedOut = books.reduce((result, book) => {
+    result.push({name: book.title, count: book.borrows.length});
+    return result
+  }, []);
+  bookNumberCheckedOut.sort((numCheckA, numCheckB) => numCheckA.count > numCheckB.count ? -1 : 1);
+  return bookNumberCheckedOut.slice(0, 5);
 }
 
 function getMostPopularAuthors(books, authors) {}
 
-console.log(getMostCommonGenres(books));
-console.log(books[0]);
+// console.log(getMostPopularBooks(books));
+// console.log(books[0]);
 
 module.exports = {
   getTotalBooksCount,
