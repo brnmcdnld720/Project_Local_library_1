@@ -20,8 +20,7 @@ function getMostCommonGenres(books) {
   (genreIndex !== -1)? genresArray[genreIndex].count++ : genresArray.push({name: book.genre, count: 1});
 
  });
- genresArray.sort((genreA, genreB) => genreA.count > genreB.count ? -1 : 1);
- return genresArray.slice(0, 5);
+ return topFiveSorted(genresArray);
 }
 
 function getMostPopularBooks(books) {
@@ -29,8 +28,7 @@ function getMostPopularBooks(books) {
     result.push({name: book.title, count: book.borrows.length});
     return result
   }, []);
-  bookNumberCheckedOut.sort((numCheckA, numCheckB) => numCheckA.count > numCheckB.count ? -1 : 1);
-  return bookNumberCheckedOut.slice(0, 5);
+  return topFiveSorted(bookNumberCheckedOut);
 }
 
 function getMostPopularAuthors(books, authors) {
@@ -46,13 +44,14 @@ function getMostPopularAuthors(books, authors) {
       authorNumberCheckedOut[authorIndex].count += book.borrows.length;
     }
   });
-  authorNumberCheckedOut.sort((authorA, authorB) => authorA.count > authorB.count ? -1 : 1)
-  return authorNumberCheckedOut.slice(0, 5);
+  return topFiveSorted(authorNumberCheckedOut);
 }
 
-// console.log(getMostPopularAuthors(authors));
-console.log(authors[8]);
-console.log(books[0]);
+function topFiveSorted(array){
+  array.sort((countA, countB) => countA.count > countB.count ? -1 : 1)
+  return array.slice(0, 5);
+}
+// test returns typeError program runs fine though?
 
 module.exports = {
   getTotalBooksCount,
