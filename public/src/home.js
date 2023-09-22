@@ -32,19 +32,18 @@ function getMostPopularBooks(books) {
 }
 
 function getMostPopularAuthors(books, authors) {
-  const authorNumberCheckedOut = []
+  const mostPopularAuthorsArray = makeArrayNameAndCountObj(authors);
   books.forEach((book) => {
     const authorId = book.authorId
-    const authorName = `${authors[authorId].name.first} ${authors[authorId].name.last}`
-    const authorIndex = authorNumberCheckedOut.findIndex((authorNum) => authorNum.name === authorName);
-    if (authorIndex === -1 ) {
-      authorNumberCheckedOut.push({name: authorName, count: book.borrows.length})
-     }
-    else {
-      authorNumberCheckedOut[authorIndex].count += book.borrows.length;
-    }
+    mostPopularAuthorsArray[authorId].count += book.borrows.length;
   });
-  return topFiveSorted(authorNumberCheckedOut);
+  return topFiveSorted(mostPopularAuthorsArray);
+}
+
+function makeArrayNameAndCountObj (array){
+  const arrayFormatted = array.map((arrayItem) => {
+    return {name: `${arrayItem.name.first} ${arrayItem.name.last}`, count: 0}});
+  return arrayFormatted;
 }
 
 function topFiveSorted(array){
@@ -52,6 +51,9 @@ function topFiveSorted(array){
   return array.slice(0, 5);
 }
 // test returns typeError program runs fine though?
+// console.log(makeArrayNameAndCountObj(authors));
+// console.log(authors);
+// console.log(books)
 
 module.exports = {
   getTotalBooksCount,
