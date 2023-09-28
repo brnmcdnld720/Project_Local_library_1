@@ -44,12 +44,6 @@ function getBooksPossessedByAccount(account, books, authors) {
   });
   return booksCheckedOutByAccountId;
 }
-//failing getBooksPossessedByAccount test: unsure as to why, formatted and does return multiple books if on account
-
-// console.log(accounts.indexOf(accounts.find((account) => account.name.last === 'Buckner')))
-// console.log(accounts[26])
-// console.log(getBooksPossessedByAccount(accounts[26], books, authors));
-
 
 module.exports = {
   findAccountById,

@@ -33,7 +33,6 @@ function getMostPopularBooks(books) {
 
 function getMostPopularAuthors(books, authors) {
   let mostPopularAuthorsArray = makeArrayNameAndCountObj(authors);
-  // console.log(mostPopularAuthorsArray);
   books.forEach((book) => {
     const authorId = book.authorId
     const matchedAuthor = mostPopularAuthorsArray.find((author) => author.id === authorId)
@@ -55,10 +54,6 @@ function topFiveSorted(array){
   array.sort((countA, countB) => countA.count > countB.count ? -1 : 1)
   return array.slice(0, 5);
 }
-// test returns typeError program runs fine though? logged all counts are numbers
-// console.log(makeArrayNameAndCountObj(authors));
-// console.log(authors);
-// console.log(books)
 
 module.exports = {
   getTotalBooksCount,

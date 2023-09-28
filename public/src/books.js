@@ -23,7 +23,6 @@ function getBorrowersForBook(book, accounts) {
   return borrowersAccounts.slice(0, 10);
 }
 
-// console.log(getBorrowersForBook(books[11], accounts)); // books[11] id = "5f44713245a57860eea8cff9" 
 module.exports = {
   findAuthorById,
   findBookById,
