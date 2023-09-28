@@ -39,8 +39,9 @@ function getBooksPossessedByAccount(account, books, authors) {
   const booksNotReturned = books.filter((book) => book.borrows[0].returned === false);
   const booksCheckedOutByAccountId = booksNotReturned.filter((book) => book.borrows[0].id === account.id )
   booksCheckedOutByAccountId.forEach((book) => {
-    book.author = authors[book.authorId];
-  }) 
+    const author = authors.find((author) => author.id === book.authorId)
+    book.author = author;
+  });
   return booksCheckedOutByAccountId;
 }
 //failing getBooksPossessedByAccount test: unsure as to why, formatted and does return multiple books if on account
