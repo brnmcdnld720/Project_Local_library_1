@@ -32,17 +32,22 @@ function getMostPopularBooks(books) {
 }
 
 function getMostPopularAuthors(books, authors) {
-  const mostPopularAuthorsArray = makeArrayNameAndCountObj(authors);
+  let mostPopularAuthorsArray = makeArrayNameAndCountObj(authors);
+  // console.log(mostPopularAuthorsArray);
   books.forEach((book) => {
     const authorId = book.authorId
-    mostPopularAuthorsArray[authorId].count += book.borrows.length;
+    const matchedAuthor = mostPopularAuthorsArray.find((author) => author.id === authorId)
+    matchedAuthor.count += book.borrows.length;
+  });
+  mostPopularAuthorsArray = mostPopularAuthorsArray.map((author) =>  {
+   return  {name: author.name, count: author.count}
   });
   return topFiveSorted(mostPopularAuthorsArray);
 }
 
 function makeArrayNameAndCountObj (array){
   const arrayFormatted = array.map((arrayItem) => {
-    return {name: `${arrayItem.name.first} ${arrayItem.name.last}`, count: 0}});
+    return {id: arrayItem.id, name: `${arrayItem.name.first} ${arrayItem.name.last}`, count: 0}});
   return arrayFormatted;
 }
 
@@ -50,7 +55,7 @@ function topFiveSorted(array){
   array.sort((countA, countB) => countA.count > countB.count ? -1 : 1)
   return array.slice(0, 5);
 }
-// test returns typeError program runs fine though?
+// test returns typeError program runs fine though? logged all counts are numbers
 // console.log(makeArrayNameAndCountObj(authors));
 // console.log(authors);
 // console.log(books)
